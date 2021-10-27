@@ -1,10 +1,14 @@
 .App {
   text-align: center;
+  &-logo {
+    height: 40vmin;
+    pointer-events: none;
+    color: yellow;
+  }
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.hello-world {
+  background: red;
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -1,0 +1,16 @@
+$text-font-stack: "Open Sans", "Helvetica Neue Light", "Helvetica Neue",
+  "Helvetica", "Arial", sans-serif !default;
+
+$base-color: #c6538c;
+$border-dark: rgba($base-color, 0.88);
+$text-color: rgb(34, 34, 34) !default;
+$brand-color: rgb(229, 0, 80) !default;
+$light-grey: rgb(237, 237, 237) !default;
+$mid-grey: rgb(153, 153, 153) !default;
+$dark-grey: rgb(68, 68, 68) !default;
+
+$breakpoints: (
+  "small": 375px,
+  "medium": 768px,
+  "large": 1024px,
+) !default;
