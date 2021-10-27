@@ -26,3 +26,16 @@ hr {
   height: 0; /* 1 */
   overflow: visible; /* 2 */
 }
+
+#root {
+  height: inherit;
+  > div {
+    height: inherit;
+  }
+}
+
+.ant-form-item {
+  &-label {
+    display: flex;
+  }
+}

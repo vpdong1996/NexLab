@@ -1,6 +1,7 @@
-import useSWR, { SWRConfiguration, SWRResponse } from "swr";
+import useSWR, { SWRConfiguration, SWRResponse, useSWRConfig } from "swr";
 import { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import axiosClient from "./globalInterceptorSetup";
+import { messageNotification } from "../helpers/utils";
 
 export type GetRequest = AxiosRequestConfig | null;
 
@@ -37,23 +38,20 @@ export default function useRequest<Data = unknown, Error = unknown>(
      * function is actually only called by `useSWR` when it isn't.
      */
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    () => axiosClient.request<Data>(request!)
-    // {
-    //   ...config,
-    //   fallbackData: fallbackData && {
-    //     status: 200,
-    //     statusText: "InitialData",
-    //     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    //     config: request!,
-    //     headers: {},
-    //     data: fallbackData,
-    //   },
-    // }
+    () => axiosClient.request<Data>(request!),
+    {
+      revalidateOnFocus: false,
+      revalidateOnMount: config.revalidateOnMount,
+    }
   );
+  // console.log("-", cache.get(JSON.stringify(request)));
+  if (error) {
+    messageNotification("error", "Fetch failed!");
+  }
 
   return {
     data: response && response.data,
-    response,
+    response: response,
     error,
     isValidating,
     mutate,

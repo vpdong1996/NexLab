@@ -1,7 +1,9 @@
+import { API_URL } from "./constants";
+
 /* eslint-disable import/no-anonymous-default-export */
 export const config = {
   api: {
-    baseURL: "https://jsonplaceholder.typicode.com" as string,
+    baseURL: API_URL as string,
     timeout: 25000 as number,
   },
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { User } from "../../services/user";
+import { User } from "../../types/User";
 import UserList from "./UserList";
 
 interface UserContainerProps {

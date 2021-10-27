@@ -1,24 +1,20 @@
 import React from "react";
 import UserContainer from "../components/user/UserContainer";
-import { User, USER_URL } from "../services/user";
 import useRequest from "../services/useRequest";
-import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
 import ContentWrapper from "../components/content-wrapper";
-
-const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+import { User } from "../types/User";
+import { USER_URL } from "../commons/constants";
+import Spinner from "../components/spinner-indicator";
 
 const Users = () => {
   const { data: users, isValidating } = useRequest<User[]>({ url: USER_URL });
+
   return (
-    <ContentWrapper>
-      <div className="user">
-        {!users && isValidating ? (
-          <Spin indicator={antIcon} />
-        ) : (
-          <UserContainer users={users} />
-        )}
-      </div>
+    <ContentWrapper
+      classes={["user"]}
+      isLoading={Boolean(!users && isValidating)}
+    >
+      <UserContainer users={users} />
     </ContentWrapper>
   );
 };

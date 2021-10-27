@@ -1,41 +1,12 @@
+import { POST_URL } from "../../commons/constants";
+import { PostDto, PostUpdateDto } from "../../types/Post";
 import axiosClient from "../globalInterceptorSetup";
 
-export const POST_URL = "/posts";
-
-export interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
-
-export interface PostDto {
-  userId: number;
-  title: string;
-  body: string;
-}
-
-interface PostUpdateDto extends Post {}
-
 export const PostService = {
-  // getPosts: () => {
-  //   return axiosClient
-  //     .get<Post[]>(POST_URL)
-  //     .then((response) => response)
-  //     .catch((error) => error);
-  // },
-
-  // getPostById: (id: number) => {
-  //   return axiosClient
-  //     .get<Post>(POST_URL, { params: { id } })
-  //     .then((response) => response)
-  //     .catch((error) => error);
-  // },
-
-  createNewPost<T>(post: PostDto) {
+  createNewPost<T>(post: PostDto): Promise<T> {
     return axiosClient
       .post<T>(POST_URL, post)
-      .then((response) => response)
+      .then((response) => response.data)
       .catch((error) => error);
   },
 
