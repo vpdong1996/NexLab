@@ -11,7 +11,7 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
   return (
     <Row gutter={[24, 24]}>
       {posts?.map((post) => (
-        <Col key={post.id} span={24}>
+        <Col key={`${post.id}-${post.title}`} span={24}>
           <PostItem key={post.id} post={post} />
         </Col>
       ))}

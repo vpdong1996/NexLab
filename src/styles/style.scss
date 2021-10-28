@@ -1,9 +1,11 @@
 @charset "UTF-8";
+@import "./variables.scss";
+@import "./font.scss";
 
 @import "./base.scss";
-@import "./variables.scss";
 @import "./typography.scss";
-@import "./font.scss";
 @import "./components/navbar/navbar.scss";
-@import "./components/user/user.scss";
 @import "./components/spinner-indicator/spinner.scss";
+@import "./components/button/button.scss";
+@import "./components/user/user.scss";
+@import "./components//post/post.scss";

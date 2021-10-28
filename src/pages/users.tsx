@@ -4,7 +4,6 @@ import useRequest from "../services/useRequest";
 import ContentWrapper from "../components/content-wrapper";
 import { User } from "../types/User";
 import { USER_URL } from "../commons/constants";
-import Spinner from "../components/spinner-indicator";
 
 const Users = () => {
   const { data: users, isValidating } = useRequest<User[]>({ url: USER_URL });

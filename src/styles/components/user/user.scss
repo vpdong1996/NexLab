@@ -1,4 +1,13 @@
 .user {
+  .avatar--wrapper {
+    display: inline-flex;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
   &--list {
     display: flex;
     justify-content: center;

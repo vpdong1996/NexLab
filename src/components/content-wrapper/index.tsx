@@ -17,12 +17,17 @@ const ContentWrapper: React.FC<ContainerWrapper> = ({
   const { md } = useBreakpoint();
   return (
     <div className={classes.join(" ")}>
-      <NavBar />
+      {/* <NavBar /> */}
 
       {isLoading ? (
         <Spinner />
       ) : (
-        <div style={{ margin: md ? 100 : 25 }}>{children}</div>
+        <div
+          className="content-container"
+          style={{ padding: md ? 100 : 25, flex: 1 }}
+        >
+          {children}
+        </div>
       )}
     </div>
   );

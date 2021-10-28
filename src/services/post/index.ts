@@ -10,10 +10,10 @@ export const PostService = {
       .catch((error) => error);
   },
 
-  updatePost<T>(post: PostUpdateDto) {
+  updatePost<T>(id: number | string, post: PostUpdateDto) {
     return axiosClient
-      .put<T>(`${POST_URL}/${post.id}`, post)
-      .then((response) => response)
+      .patch<T>(`${POST_URL}/${id}`, { ...post })
+      .then((response) => response.data)
       .catch((error) => error);
   },
 

@@ -1,0 +1,8 @@
+@mixin button-style($buttonColor: #1890ff) {
+  background-color: $buttonColor;
+  border-color: $buttonColor;
+}
+
+.ant-btn-primary {
+  @include button-style($dark-base-color);
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Modal, Button, Form, Input } from "antd";
 import { Post, PostDto } from "../../types/Post";
 import { useForm } from "antd/lib/form/Form";
@@ -6,48 +6,75 @@ import { useParams } from "react-router";
 import { Params } from "../../types/Param";
 import { PostService } from "../../services/post";
 import { messageNotification } from "../../helpers/utils";
+import { FormModalContext } from "../../contexts/form-modal";
 
+const { TextArea } = Input;
 interface PostModalProps {
-  post?: Post;
-  handlePostMutate: (data: Post) => void;
+  addPostMutate: (data: Post) => void;
+  updatePostMutate: (data: Post) => void;
 }
 
-const PostModal: React.FC<PostModalProps> = ({ post, handlePostMutate }) => {
-  const [isModalVisible, setIsModalVisible] = useState<true | false>(false);
+const PostModal: React.FC<PostModalProps> = ({
+  addPostMutate,
+  updatePostMutate,
+}) => {
+  const [{ isVisible, data }, modalDispatch] = useContext(FormModalContext);
   const [isSubmitting, setIsSubmitting] = useState<true | false>(false);
   const params: Params = useParams();
   const [form] = useForm();
-  const successMsg = `${post ? "Update" : "Create"} post successfully`;
+  const successMsg = `${data ? "Update" : "Create"} post successfully`;
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
+  useEffect(() => {
+    if (data) {
+      form.setFieldsValue({ title: data.title, body: data.body });
+    }
+  }, [data]);
 
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+  const onClickAddNew = () => modalDispatch({ type: "open" });
+
+  const onCancel = () => modalDispatch({ type: "close" });
 
   const onFinish = (values: PostDto) => {
     setIsSubmitting((prev) => !prev);
+
+    // Update post
+    if (data) {
+      PostService.updatePost<Post>(data.id, {
+        ...values,
+        id: data.id,
+        userId: data.userId,
+      })
+        .then((response) => {
+          updatePostMutate(response);
+          modalDispatch("close");
+          messageNotification("success", successMsg);
+        })
+        .finally(() => setIsSubmitting((prev) => !prev));
+      return;
+    }
+
+    // Delete Post
     if (params.userId) values = { ...values, userId: parseInt(params.userId) };
     PostService.createNewPost<Post>(values)
       .then((response) => {
-        handlePostMutate(response);
+        addPostMutate(response);
+        modalDispatch("close");
         messageNotification("success", successMsg);
-        handleCancel();
       })
       .finally(() => setIsSubmitting((prev) => !prev));
   };
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button type="primary" onClick={onClickAddNew}>
         Add new post
       </Button>
       <Modal
-        title={post ? "Update Post" : "Create New Post"}
-        visible={isModalVisible}
-        onCancel={handleCancel}
+        title={data ? "Update Post" : "Create New Post"}
+        visible={isVisible}
+        onCancel={onCancel}
+        destroyOnClose={true}
+        focusTriggerAfterClose={false}
         footer={[
           <Button
             type="primary"
@@ -59,7 +86,6 @@ const PostModal: React.FC<PostModalProps> = ({ post, handlePostMutate }) => {
             Submit
           </Button>,
         ]}
-        destroyOnClose={true}
       >
         <Form
           initialValues={{ body: "" }}
@@ -74,7 +100,7 @@ const PostModal: React.FC<PostModalProps> = ({ post, handlePostMutate }) => {
             <Input />
           </Form.Item>
           <Form.Item label="Post description" name="body">
-            <Input />
+            <TextArea autoSize />
           </Form.Item>
         </Form>
       </Modal>

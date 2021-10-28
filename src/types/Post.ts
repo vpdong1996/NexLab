@@ -11,4 +11,9 @@ export interface PostDto {
   body: string;
 }
 
-export interface PostUpdateDto extends Post {}
+export interface PostUpdateDto {
+  title?: string;
+  body?: string;
+  userId: number;
+  id: number;
+}

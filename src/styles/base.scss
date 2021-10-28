@@ -10,6 +10,7 @@ html {
 
 body {
   margin: 0;
+  font-family: $text-font-stack;
 }
 
 main {
@@ -19,6 +20,10 @@ main {
 h1 {
   font-size: 2em;
   margin: 0.67em 0;
+}
+
+h2 {
+  color: white;
 }
 
 hr {
@@ -31,6 +36,12 @@ hr {
   height: inherit;
   > div {
     height: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content-container {
+    background: linear-gradient(to right, $base-color, $dark-base-color);
   }
 }
 

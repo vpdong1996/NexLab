@@ -4,8 +4,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "antd/dist/antd.less"; // or 'antd/dist/antd.less'
 import "./styles/style.scss";
+import { FormModalProvider } from "./contexts/form-modal";
+ReactDOM.render(
+  <FormModalProvider>
+    <App />
+  </FormModalProvider>,
 
-ReactDOM.render(<App />, document.getElementById("root"));
+  document.getElementById("root")
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

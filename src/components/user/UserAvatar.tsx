@@ -16,6 +16,7 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ userId, username }) => {
 
   return (
     <div
+      className="avatar--wrapper"
       style={{ cursor: "pointer", display: "inline-flex" }}
       onClick={onClickAvatar}
     >
@@ -25,7 +26,7 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ userId, username }) => {
           backgroundColor: randomColorGenerator(username),
           verticalAlign: "center",
         }}
-        size={{ sm: 40, md: 60, lg: 80, xl: 120, xxl: 200 }}
+        size={{ xs: 65, sm: 70, md: 80, lg: 100, xl: 150, xxl: 200 }}
       >
         {username}
       </Avatar>
