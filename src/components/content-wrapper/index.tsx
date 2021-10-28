@@ -1,6 +1,5 @@
 import React from "react";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
-import { NavBar } from "../navbar";
 import Spinner from "../spinner-indicator";
 
 interface ContainerWrapper {
@@ -17,8 +16,6 @@ const ContentWrapper: React.FC<ContainerWrapper> = ({
   const { md } = useBreakpoint();
   return (
     <div className={classes.join(" ")}>
-      {/* <NavBar /> */}
-
       {isLoading ? (
         <Spinner />
       ) : (
