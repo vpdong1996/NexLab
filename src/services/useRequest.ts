@@ -1,4 +1,4 @@
-import useSWR, { SWRConfiguration, SWRResponse, useSWRConfig } from "swr";
+import useSWR, { SWRConfiguration, SWRResponse } from "swr";
 import { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import axiosClient from "./globalInterceptorSetup";
 import { messageNotification } from "../helpers/utils";

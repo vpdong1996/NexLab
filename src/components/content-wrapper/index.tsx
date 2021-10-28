@@ -21,7 +21,7 @@ const ContentWrapper: React.FC<ContainerWrapper> = ({
       ) : (
         <div
           className="content-container"
-          style={{ padding: md ? 100 : 25, flex: 1 }}
+          style={{ padding: md ? "100px 200px" : 25, flex: 1 }}
         >
           {children}
         </div>
