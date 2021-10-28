@@ -2,10 +2,13 @@
 
 https://nex-lab-vpdong1996.vercel.app/
 
-# Getting Started with Create React App
+# A Simple Blog-posts App.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+This app is using: 
+  - ReactJs v17 + Typescript
+  - [SWR](https://github.com/vercel/swr) for server state management 
+  - SCSS 
+  - Ant design for UI components
 ## Available Scripts
 
 In the project directory, you can run:
